@@ -1,3 +1,20 @@
+-----
+**This repository was forked by the Librehash organization on January 28th, 2020 for the purposes of:** 
+
+A) Running a code audit (link updated afterward) 
+
+B) Assessing the various repos attached to the code 
+
+C) Porting said code to our self-hosted, deployed code IDE (Visual Studio) 
+
+D) Uploading the repo to our private instance & perhaps integrating it with current CI/CD to test code efficiency 
+
+E) Static code analysis 
+
+F) Side-by-side comparison of the code vs. whitepaper + technical specification
+------
+
+
 [<img src="https://insolar.io/st/github-readme-banner.png">](http://insolar.io/?utm_source=Github)
 
 Insolar platform is the most secure, scalable, and comprehensive business-ready blockchain toolkit in the world. Insolar’s goal is to give businesses access to features and services that enable them to launch new decentralized applications quickly and easily. Whether a minimum viable product or full-scale production software, Insolar builds and integrates applications for your enterprise's existing systems.
