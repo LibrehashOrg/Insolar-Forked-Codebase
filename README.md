@@ -19,6 +19,7 @@ F) Side-by-side comparison of the code vs. whitepaper + technical specification
 
 Insolar platform is the most secure, scalable, and comprehensive business-ready blockchain toolkit in the world. Insolar’s goal is to give businesses access to features and services that enable them to launch new decentralized applications quickly and easily. Whether a minimum viable product or full-scale production software, Insolar builds and integrates applications for your enterprise's existing systems.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f6b40fbccc9b47a7b09713fcdf895858)](https://app.codacy.com/gh/Librehas/Insolar-Forked-Codebase?utm_source=github.com&utm_medium=referral&utm_content=Librehas/Insolar-Forked-Codebase&utm_campaign=Badge_Grade_Settings)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2150/badge)](https://bestpractices.coreinfrastructure.org/projects/2150)
 [![GolangCI](https://golangci.com/badges/github.com/insolar/insolar.svg)](https://golangci.com/r/github.com/insolar/insolar/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/insolar/insolar)](https://goreportcard.com/report/github.com/insolar/insolar)
