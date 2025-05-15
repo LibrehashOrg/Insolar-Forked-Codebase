@@ -5,7 +5,9 @@
 // Stringer is a tool to automate the creation of methods that satisfy the fmt.Stringer
 // interface. Given the name of a (signed or unsigned) integer type T that has constants
 // defined, stringer will create a new self-contained Go source file implementing
+//
 //	func (t T) String() string
+//
 // The file is created in the same package and directory as the package that defines T.
 // It has helpful defaults designed for use with go generate.
 //
@@ -98,7 +100,7 @@ func Usage() {
 	fmt.Fprintf(os.Stderr, "\tstringer [flags] -type T [directory]\n")
 	fmt.Fprintf(os.Stderr, "\tstringer [flags] -type T files... # Must be a single package\n")
 	fmt.Fprintf(os.Stderr, "For more information, see:\n")
-	fmt.Fprintf(os.Stderr, "\thttp://godoc.org/golang.org/x/tools/cmd/stringer\n")
+	fmt.Fprintf(os.Stderr, "\thttps://pkg.go.dev/golang.org/x/tools/cmd/stringer\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -215,7 +217,7 @@ type Package struct {
 // parsePackage exits if there is an error.
 func (g *Generator) parsePackage(patterns []string, tags []string) {
 	cfg := &packages.Config{
-		Mode: packages.LoadSyntax,
+		Mode: packages.NeedName | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax,
 		// TODO: Need to think about constants in test files. Maybe write type_string_test.go
 		// in a separate pass? For later.
 		Tests:      false,
@@ -570,6 +572,7 @@ func (g *Generator) buildOneRun(runs [][]Value, typeName string) {
 }
 
 // Arguments to format are:
+//
 //	[1]: type name
 //	[2]: size of index element (8 for uint8 etc.)
 //	[3]: less than zero check (for signed types)
@@ -610,7 +613,12 @@ func (g *Generator) buildMultipleRuns(runs [][]Value, typeName string) {
 			g.Printf("\t\treturn _%s_name_%d\n", typeName, i)
 			continue
 		}
-		g.Printf("\tcase %s <= i && i <= %s:\n", &values[0], &values[len(values)-1])
+		if values[0].value == 0 && !values[0].signed {
+			// For an unsigned lower bound of 0, "0 <= i" would be redundant.
+			g.Printf("\tcase i <= %s:\n", &values[len(values)-1])
+		} else {
+			g.Printf("\tcase %s <= i && i <= %s:\n", &values[0], &values[len(values)-1])
+		}
 		if values[0].value != 0 {
 			g.Printf("\t\ti -= %s\n", &values[0])
 		}
